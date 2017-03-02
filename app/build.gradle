@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+//apply plugin: 'com.tencent.tinker.patch'
+
+android {
+    signingConfigs {
+        zhengchen {
+            keyAlias 'zhengchen'
+            keyPassword '901028'
+            storeFile file('F:/KeyStore/tinker.jks')
+            storePassword '901028'
+        }
+    }
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.zhengchen.tinker"
+        minSdkVersion 14
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            //是否混淆
+            minifyEnabled false
+            //获取混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.2.0'
+    testCompile 'junit:junit:4.12'
+
+//    //optional, help to generate the final application
+//    provided('com.tencent.tinker:tinker-android-anno:1.7.7')
+//    //tinker's main Android lib
+//    compile('com.tencent.tinker:tinker-android-lib:1.7.7')
+}
+//def gitsha(){
+//    return 'git rev-parse --short HEAD'.execute().text.trim()
+//}
